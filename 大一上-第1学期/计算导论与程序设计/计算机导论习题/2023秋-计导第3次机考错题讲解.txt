@@ -1,0 +1,171 @@
+6-2 麦卡锡函数
+麦卡锡函数 f(n)的定义如下：
+如果n > 100 f(n) = n - 10
+否则f(n) = f(f(n + 11)) 。
+设计递归函数计算f(n)。
+此题要求递归求解，且不允许使用全局变量，静态变量等。
+在递归函数中要输出调用该函数时的参数值及一个空格（用作分隔符），在主函数中输出会最后返回的函数值。具体格式参考输出样例。
+输入样例：
+100
+输出样例：
+100 111 101 91
+测试数据保证所有整数可以用int类型存储。
+函数接口定义：int m91(int n);
+其中 n 是用户传入的参数。 n 为正整数； 函数须返回麦卡锡函数的求值结果。
+-------------------------------
+int m91(int n){
+	printf("%d ", n);
+	if (n>100)
+		return (n-10);
+	else{
+	 	return (m91(m91(n+11)));		
+	} 
+}
+
+6-3 矩阵校验
+为了减少抄写错误，有人发明了一个检验的办法。这个办法就是把每一个字对应一个数字，这样每行文字加起来便得到一个特殊的数字，这个数字便成为了这一行的校验码。同样，对于每一列也这样处理。每当抄完一页时，抄写者会把每一行以及每一列的文字都加起来看看新的校验码是否与原文的相同。如果这一页每一行，每一列的校验码都和原文完全相同，则认为这一页的抄写无误。如果某一行或某一列的校验码与原文中的不同，则说明这一行或这一列至少存在一个抄写错误。现请你写一个函数来完成这个校验的过程。
+输入格式：
+共12行，每行均为10个用空格分隔的整数。其中前10行代表书中的文字，第11行依次代表每行的校验码，第12行依次代表每列的校验码。测试用例保证合法且所有整数均可以用int存储。
+输出格式：
+只有一行，如果抄写无误，则输出right，如果抄写有错误，则输出3个用空格分隔的整数，依次代表错误出现的行、错误出现的列（行、列均从0开始数）以及错误的值（测试用例保证，如果有错误，则只有一个字是错误的）。
+函数接口定义：
+void check( int matrix[][LEN] , int sum_row[] , int sum_col[] , int rows , int cols ) ;
+-----------------------------------
+void check(int matrix[][LEN], int sum_row[], int sum_col[], int rows, int cols){
+	int i,j,sum,x,y,flag;
+	flag=2;	x=-1;	y=-1;
+	for (i=0;i<LEN;i++){
+		for (j=0,sum=0;j<LEN;j++)
+			sum+=matrix[i][j];
+		if (sum!=sum_row[i]){
+			x=i;
+			flag--;
+		}
+	}
+	for (j=0;j<LEN;j++){
+		for (i=0,sum=0;i<LEN;i++)
+			sum+=matrix[i][j];
+		if (sum!=sum_col[j]){
+			y=j;
+			flag--;
+		}
+	}
+	if (flag==0){
+		printf("%d %d %d",x,y,matrix[x][y]);
+	} else {
+		printf("right");
+	}
+}
+
+6-4 字符串重组
+请写一个函数，实现按规则将两个字符串组和成一个字符串。
+输入：
+共2行，每行一个字符串，其中第一个字符串只包含大写字母，第二个字符串只包含数字且长度不超过15。测试用例保证组合后的字符串长度不超过127。
+输出：
+只有一行，为组合后的字符串。
+函数接口定义：
+void recombination( char  str1[], char  str2[] ) ;
+输入样例：
+ABCDEFGHIJKLMNOPQRSTUVWXYZ
+012345
+输出样例：
+0A1BC2DEF3GHIJ4KLMNO5PQRSTUVWXYZ
+----------------------------------------------------
+void recombination(char str1[], char str2[]){
+	int i,tmp,j,len;
+	len=strlen(str1);
+	for (i=0,tmp=0;str2[i]!='\0';i++){
+		if (i==0)
+			tmp+=str2[i]-'0';
+		else tmp+=str2[i]-'0'+1;
+		//printf("tmp=%d\n",tmp);
+		for (j=len+i;j>=tmp;j--){
+			str1[j+1]=str1[j];
+		}
+		//puts(str1);
+		str1[tmp]=str2[i];
+		//puts(str1);
+	}
+}
+
+7-1 玩游戏一
+你正在玩一款新的游戏，在游戏中你有N个用于给你的战士补充能量的道具和M个战士。这N个道具都有一个能量值，代表该道具能给战士提供的总能量，给战士补充后该值会永久减少，该值为0后该道具就没有用了。例如某道具的能量值为500，如果用它给一个战士补充了300的能量，则该道具的能量值变为200。现在你要带领你的战士们出征了，在出征前你要给这M个战士补充能量。假设初始时每个战士的能量都为0，补充完后所有的战士的能量都一样。如果一个战士在补充能量时只能使用1个道具（1个道具可以给若干个战士补充能量）。
+现在请你写一段程序来计算一下，你最大能给每个战士补充的能量值是多少？
+输入格式:
+第一行为2个整数，分别代表N（1<=N<=10000）和M(1<=M<=20000)。
+第二行为N个整数，代表这N个道具能提供的能量值（所有能量值大于等于100且小于等于2000000）。
+输出格式:
+为一个整数，代表你最大能给每个战士补充的能量值。测试数据保证有解。
+输入样例:
+5 13
+765 506 483 329 492
+输出样例:
+164
+----------------------------------
+/*-------------------------------
+思路：穷举max(Ni)/M~sum(Ni)/M,范围多达1e10个。用二分查找提高效率。
+穷举验证策略-依次N1到Nn充能，按mid给每兵充；计算可以充能多少兵。
+当按mid充能所充人数>=M 时，说明充能接近了，先记录当前结果，进入右半区继续查找。 
+当按mid充能所充人数<M 时，说明充能大了，进入左半区继续二分查找。
+-------------------------------------------------------------------
+*/
+#include <stdio.h>
+#define SIZE 10000 
+int createArrayN2(int data[], int num);
+int maxArray(int data[], int n);
+long long sumArray(int data[], int n);
+int charge(int data[], int n,int energy);
+int main(){
+	int n,m,a[SIZE]={0};
+	int low,high,mid,x,result;
+	scanf("%d%d",&n,&m);
+	createArrayN2(a,n);
+	low=maxArray(a,n)/m; 
+	if (low<=0)
+		low=1;	//low=0时charge会出现/0浮点错误		
+	high=sumArray(a,n)/m;//sum maybe long long. 
+	//high=2000000;
+	result=0;
+ 	while(low <= high){
+      		mid = (low + high)/2;
+      		x = charge(a,n,mid);
+      		if (x>=m){
+      			result = mid;
+      			low = mid + 1;
+			  }
+      		else high = mid - 1;	          	
+   	}
+   	printf("%d\n",result);
+}
+int createArrayN2(int data[], int num)
+{
+   int i;
+   for(i = 0; i<num; i++)
+       scanf("%d", &data[i]);
+   return i;
+}
+int maxArray(int data[], int n)
+{
+   int i,max;
+   for(i = 0,max=data[0]; i<n; i++)
+       if (data[i]>max) max=data[i];
+   return max;
+}
+long long sumArray(int data[], int n)
+{
+   int i;
+   long long total=0;
+   for(i = 0; i<n; i++)
+       total +=data[i];
+   return total;
+}
+int charge(int data[], int n,int energy)
+{
+   int i,soldiers;
+   for(i=0,soldiers=0; i<n; i++){
+		if (data[i]>=energy)
+			soldiers += (data[i]/energy); 
+   }
+   return soldiers;
+}
+
