@@ -1,0 +1,6 @@
+可以看到这里对WriteFile函数进行了一个IAT Hook操作，具体证据如下：
+这里使用GetModuleHandleA(0)来获取了模块的基地址，然后进行了如下类似操作：
+v4 = *(_DWORD *)(*(_DWORD *)(a1 + 60) + a1 + 128);
+v5 = (_DWORD *)(a1 + v4);
+这是经典的寻找导入地址表的操作，因此可以判断hook方式为IAT Hook。
+其中，WriteFile的地址条目被替换为自定义的函数sub_401000，我们跟进来看一下逻辑

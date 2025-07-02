@@ -1,0 +1,8 @@
+解题思路：
+1.首先将“realpwd”存入Buffer中
+2.Src = (char *)sub_40100A - (char *)ProcAddress - 5;
+这利用hook技术，将原来的函数地址跳转到sub_40100A函数的地址
+3.我们查看sub_40100A函数，发现它将我们的输入v11与原来的Str数组进行异或操作
+4.创造文件“pwd.txt”，然后进行WriteFile操作，进行文件写入，但是经过前面的修改，实际上将执行sub_40100A函数，将前面异或完的数据写入到文件中
+5.后面打开文件，将文件“pwd.txt”里的数据读入String2中，将String2与Buffer的数据进行比较。
+为hookapi

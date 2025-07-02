@@ -1,0 +1,30 @@
+可以看到这里对WriteFile函数进行了一个API Hook操作，具体证据如下：
+这里使用了VirtualProtect修改了WriteFile函数的前5个字节，使其跳转到自定义的函数
+_Z11MyWriteFilePvPKvmPmP11_OVERLAPPED，我们跟进这个函数，发现其中实现了自定义的脱钩
+函数，也验证了这一说法。
+接下来分析_Z11MyWriteFilePvPKvmPmP11_OVERLAPPED函数的逻辑
+
+
+# 解题思路：
+# 1.首先将“realpwd”复制给Buffer
+# 2.接着将WriteFile函数地址赋给ProcAddress
+# 3.在if语句中，调用VirtualProtect函数，
+# （1）获取了WriteFile的地址，
+# （2）对WriteFile地址处的5个字节修改了属性，使该5个字节可读、可写、可执行
+# （3）保存原始WriteFile函数的5个字节
+# （4）获得我们自定义函数sub_40100A和WriteFile函数间的偏移，保存于变量Src中
+# （5）之后两次memcpy函数的调用修改了WriteFile起始地址处的5个字节
+# （6）最后，恢复WriteFile函数处的代码属性
+# 4.接着，调用了CreateFileA函数创建了文件“pwd.txt”
+# 5.然后，执行WriteFile函数，但是因为前面修改了WriteFile起始地址处的5个字节，因此
+# 实际上是执行sub_40100A函数
+# 6.在sub_40100A函数中
+# （1）对Src初始化，Str=[0x1A,0x0A,0x0E,0x07,0x11,0x07,0x0D]
+# （2）执行sub_401005函数,实现unhook（脱钩），恢复原API起始地址处字节
+# （3）接下来将我们的输入存入v11
+# （4）然后执行for循环，对Str进行异或变化， Str[i] ^= v11[i]
+# （5）最后执行原来的WriteFile函数，将Str写入文件“pwd.txt”中
+# 7.然后又打开文件“pwd.txt”，通过Stream将其内容读入String2中
+# 8.最后将String2和Buffer进行比较，如果相等，则输出“congratulations!”。
+# 9.求得flag="hookapi"
+

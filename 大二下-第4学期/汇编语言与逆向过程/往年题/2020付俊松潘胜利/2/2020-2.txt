@@ -1,0 +1,19 @@
+除0异常题目，动态调试得到进去的函数
+int sub_401020()
+{
+  signed int v1; // [esp+4Ch] [ebp-8h]
+  signed int i; // [esp+50h] [ebp-4h]
+  signed int j; // [esp+50h] [ebp-4h]
+
+  v1 = strlen("llllllllllllllll");
+  for ( i = 0; i < v1; ++i )
+    aLlllllllllllll[i] = (4 * (aLlllllllllllll[i] & 3)) | ((aLlllllllllllll[i] & 0xC) >> 2) | aLlllllllllllll[i] & 0xF0;
+  for ( j = 0; j < v1 && aLlllllllllllll[j] == byte_429A30[j]; ++j )
+    ;
+  if ( j == 16 )
+    printf("Congratulations! You are right!\n");
+  else
+    printf("2 Sorry, you are wrong!\n");
+  system("pause");
+  return 0;
+}
