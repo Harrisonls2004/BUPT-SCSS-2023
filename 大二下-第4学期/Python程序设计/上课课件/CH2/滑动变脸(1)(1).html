@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>脆皮大学生向你发出请假条条</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font: inherit;
+        }
+
+        html {
+            color: #333;
+            font-size: 62.5%;
+        }
+
+        @media screen and (max-width: 480px) {
+            html {
+                font-size: 50%;
+            }
+        }
+
+        body {
+            font-size: 2rem;
+            padding: 0;
+            margin: 0;
+            width: 100vw;
+            height: 100vh;
+            font-family: 'Rubik', sans-serif;
+        }
+
+        .confirm,
+        .accepted,
+        .rejected {
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 72rem;
+            max-width: 100%;
+            min-width: 34rem;
+            max-height: 100%;
+            height: 46rem;
+            background-color: #ffffff;
+            border-radius: 1rem;
+        }
+
+        .confirm-body,
+        .accepted-body,
+        .rejected-body {
+            flex: 1;
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            position: relative;
+            margin: 2rem 4rem;
+        }
+
+        .confirm-body-title,
+        .accepted-body-title,
+        .rejected-body-title {
+            margin: 0;
+            padding: 0;
+            position: absolute;
+            transform: translateY(-50%);
+            top: 5%;
+            text-align: center;
+            width: 100%;
+        }
+
+        .confirm-body-subtitle,
+        .accepted-body-subtitle,
+        .rejected-body-subtitle {
+            margin: 0;
+            padding: 0;
+            position: absolute;
+            transform: translateY(-50%);
+            top: 15%;
+            text-align: center;
+            width: 100%;
+            font-size: 1.5rem;
+        }
+
+        .confirm-body-button,
+        .confirm-body-button:link,
+        .confirm-body-button:visited,
+        .accepted-body-button,
+        .rejected-body-button {
+            color: #fff;
+            border-radius: 1rem;
+            text-decoration: none;
+            padding: 1rem 2rem;
+            margin-bottom: 1rem;
+            min-width: 10rem;
+            text-align: center;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .confirm-body-button-delete {
+            background-color: #a43;
+        }
+
+        .confirm-body-button-delete:hover {
+            background-color: #c85a48;
+        }
+
+        .confirm-body-button-cancel {
+            background-color: #6a4;
+        }
+
+        .confirm-body-button-cancel:hover {
+            background-color: #81c061;
+        }
+
+        .accepted-body-button,
+        .rejected-body-button {
+            background-color: #6a4;
+        }
+
+        .accepted-body-button:hover,
+        .rejected-body-button:hover {
+            background-color: #81c061;
+        }
+
+        .boi {
+            --happiness: 0.9;
+            --derp: 1;
+            --px: 0.5;
+            --py: 0.5;
+            width: 22rem;
+            max-width: 100%;
+            height: 22rem;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-image: radial-gradient(#f7e0b2, #eb5);
+            border-radius: 100%;
+            overflow: hidden;
+            margin: 0;
+            align-self: center;
+            flex: 0 0 auto;
+            border: solid 2px #ecb23e;
+            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .boi,
+        .boi * {
+            position: absolute;
+        }
+
+        .boi::before {
+            content: '';
+            display: block;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background-image: linear-gradient(to bottom, #5a8, rgba(85, 170, 136, 0));
+            opacity: calc(1 - var(--happiness));
+        }
+
+        .boi-blush {
+            width: 20%;
+            height: 10%;
+            background-color: rgba(255, 100, 100, 0.3);
+            border: 3px solid rgba(255, 100, 100, 0.3);
+            top: calc(45% + var(--py) * 10%);
+            border-radius: 100%;
+            opacity: calc(var(--happiness) * var(--happiness) * 0.9 + 0.1);
+        }
+
+        .boi-blush-left {
+            left: calc(7% + var(--px) * 2%);
+        }
+
+        .boi-blush-right {
+            right: calc(9% - var(--px) * 2%);
+        }
+
+        .boi-eye {
+            width: calc(26% - var(--happiness) * 2%);
+            height: calc(26% - var(--happiness) * 2%);
+            background-color: #f6f6f6;
+            border-radius: 100%;
+            top: calc(25% + var(--py) * 10%);
+            overflow: hidden;
+        }
+
+        .boi-eye-left {
+            left: calc(18% + var(--px) * 4%);
+        }
+
+        .boi-eye-left::after {
+            transform: translate(calc((var(--px) + var(--derp) * 0.5) * 100%), calc((var(--py) + var(--derp) * 0.5) * 100%));
+        }
+
+        .boi-eye-right {
+            right: calc(22% - var(--px) * 4%);
+        }
+
+        .boi-eye-right::after {
+            transform: translate(calc((var(--px) + var(--derp) * -0.3) * 100%), calc((var(--py) + var(--derp) * -0.3) * 100%));
+        }
+
+        .boi-eye::after {
+            content: '';
+            display: block;
+            background-color: #421;
+            width: calc(55% - var(--happiness) * 10%);
+            height: calc(55% - var(--happiness) * 10%);
+            border-radius: 100%;
+        }
+
+        .boi-mouth {
+            width: calc(51% - var(--happiness) * 2%);
+            height: calc(26% - var(--happiness) * 2%);
+            background-color: #a33;
+            border-radius: calc((1 - var(--happiness)) * 10em) calc((1 - var(--happiness)) * 10em) calc(var(--happiness) * 16em) calc(var(--happiness) * 16em);
+            top: calc(57.5% + var(--py) * 5%);
+            left: calc(47.5% + var(--px) * 5%);
+            transform: translateX(-50%);
+            overflow: hidden;
+            border: 3px solid #962d2d;
+            -webkit-mask-image: -webkit-radial-gradient(white, black);
+        }
+
+        .boi-mouth::before {
+            content: '';
+            display: block;
+            position: absolute;
+            width: 20%;
+            height: 20%;
+            top: 0;
+            left: 50%;
+            background-color: white;
+            border-radius: 0 0 0.5rem 0.5rem;
+        }
+
+        .boi-mouth::after {
+            content: '';
+            display: block;
+            position: absolute;
+            width: 60%;
+            height: 50%;
+            left: 10%;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.2);
+            border-radius: 20rem 20rem 0 0;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- 初始界面 -->
+    <section class="confirm">
+        <div class="confirm-body">
+            <h2 class="confirm-body-title">脆皮大学生向你发出请假条条</h2>
+            <h3 class="confirm-body-subtitle">希望导员能够批假，是否接受？</h3>
+            <figure class="boi" style="--happiness:0.9; --derp:1; --px:0.5; --py:0.5;">
+                <div class="boi-blush boi-blush-left"></div>
+                <div class="boi-blush boi-blush-right"></div>
+                <div class="boi-eye boi-eye-left"></div>
+                <div class="boi-eye boi-eye-right"></div>
+                <div class="boi-mouth"></div>
+            </figure>
+            <a class="confirm-body-button confirm-body-button-cancel" href="javascript:void(0)">接受</a>
+            <a class="confirm-body-button confirm-body-button-delete" href="javascript:void(0)">拒绝</a>
+        </div>
+    </section>
+
+    <!-- 接受后的新界面 -->
+    <section class="accepted hidden">
+        <div class="accepted-body">
+            <h2 class="accepted-body-title">感谢导员批假！</h2>
+            <h3 class="accepted-body-subtitle">小星非常开心，导员开心快乐！</h3>
+            <figure class="boi" style="--happiness:1; --derp:0; --px:0.5; --py:0.5;">
+                <div class="boi-blush boi-blush-left"></div>
+                <div class="boi-blush boi-blush-right"></div>
+                <div class="boi-eye boi-eye-left"></div>
+                <div class="boi-eye boi-eye-right"></div>
+                <div class="boi-mouth"></div>
+            </figure>
+            <a class="accepted-body-button" href="javascript:void(0)">返回</a>
+        </div>
+    </section>
+
+    <!-- 拒绝后的新界面 -->
+    <section class="rejected hidden">
+        <div class="rejected-body">
+            <h2 class="rejected-body-title">小星有点难过...</h2>
+            <h3 class="rejected-body-subtitle">但小星尊重你的决定，祝你一切顺利！</h3>
+            <figure class="boi" style="--happiness:0.2; --derp:0; --px:0.5; --py:0.5;">
+                <div class="boi-blush boi-blush-left"></div>
+                <div class="boi-blush boi-blush-right"></div>
+                <div class="boi-eye boi-eye-left"></div>
+                <div class="boi-eye boi-eye-right"></div>
+                <div class="boi-mouth"></div>
+            </figure>
+            <a class="rejected-body-button" href="javascript:void(0)">返回</a>
+        </div>
+    </section>
+
+    <script>
+        const confirmSection = document.querySelector('.confirm');
+        const acceptedSection = document.querySelector('.accepted');
+        const rejectedSection = document.querySelector('.rejected');
+        const boi = document.querySelector('.boi');
+        const btnDelete = document.querySelector('.confirm-body-button-delete');
+        const btnCancel = document.querySelector('.confirm-body-button-cancel');
+        const current = {
+            happiness: 0.9,
+            derp: 1,
+            px: 0.5,
+            py: 0.5
+        };
+        const target = { ...current };
+        let rejectCount = 0;
+
+        // 事件监听
+        confirmSection.addEventListener('mousemove', onMouseMove);
+        confirmSection.addEventListener('mouseleave', onMouseLeave);
+
+        btnCancel.addEventListener('click', () => {
+            confirmSection.classList.add('hidden');
+            acceptedSection.classList.remove('hidden');
+            target.happiness = 1; // 开心到起飞
+            updateBoi();
+        });
+
+        btnDelete.addEventListener('click', () => {
+            rejectCount++;
+            if (rejectCount >= 5) {
+                btnDelete.style.position = 'absolute';
+                btnDelete.style.left = `${Math.random() * 80}%`;
+                btnDelete.style.top = `${Math.random() * 80}%`;
+            }
+            target.happiness = Math.max(0.1, target.happiness - 0.1); // 每次点击拒绝，表情更委屈
+            btnCancel.style.transform = `scale(${1 + rejectCount * 0.1})`; // 接受按钮变大
+            updateBoi();
+        });
+
+        acceptedSection.querySelector('a').addEventListener('click', () => {
+            acceptedSection.classList.add('hidden');
+            confirmSection.classList.remove('hidden');
+            resetBoi();
+        });
+
+        rejectedSection.querySelector('a').addEventListener('click', () => {
+            rejectedSection.classList.add('hidden');
+            confirmSection.classList.remove('hidden');
+            resetBoi();
+        });
+
+        function onMouseMove({ clientX: x, clientY: y }) {
+            let dx1 = x - btnDelete.getBoundingClientRect().x - btnDelete.getBoundingClientRect().width * 0.5;
+            let dy1 = y - btnDelete.getBoundingClientRect().y - btnDelete.getBoundingClientRect().height * 0.5;
+            let dx2 = x - btnCancel.getBoundingClientRect().x - btnCancel.getBoundingClientRect().width * 0.5;
+            let dy2 = y - btnCancel.getBoundingClientRect().y - btnCancel.getBoundingClientRect().height * 0.5;
+            let px = (x - confirmSection.getBoundingClientRect().x) / confirmSection.getBoundingClientRect().width;
+            let py = (y - confirmSection.getBoundingClientRect().y) / confirmSection.getBoundingClientRect().height;
+            let distDelete = Math.sqrt(dx1 * dx1 + dy1 * dy1);
+            let distCancel = Math.sqrt(dx2 * dx2 + dy2 * dy2);
+            let happiness = Math.pow(distDelete / (distCancel + distDelete), 0.75);
+
+            target.happiness = happiness;
+            target.derp = 0;
+            target.px = px;
+            target.py = py;
+        }
+
+        function onMouseLeave() {
+            target.happiness = 0.9;
+            target.derp = 1;
+            target.px = 0.5;
+            target.py = 0.5;
+        }
+
+        function updateBoi() {
+            for (let prop in target) {
+                if (target[prop] === current[prop]) {
+                    continue;
+                } else if (Math.abs(target[prop] - current[prop]) < 0.01) {
+                    current[prop] = target[prop];
+                } else {
+                    current[prop] += (target[prop] - current[prop]) * 0.1;
+                }
+                boi.style.setProperty(`--${prop}`, current[prop]);
+            }
+            requestAnimationFrame(updateBoi);
+        }
+
+        function resetBoi() {
+            target.happiness = 0.9;
+            target.derp = 1;
+            target.px = 0.5;
+            target.py = 0.5;
+            rejectCount = 0;
+            btnCancel.style.transform = 'scale(1)';
+            btnDelete.style.position = 'static';
+        }
+
+        updateBoi();
+    </script>
+</body>
+</html>
