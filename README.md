@@ -2,9 +2,11 @@
 
 这里是北京邮电大学网络空间安全学院2023级本科课程资料。
 
-### 课程汇总介绍
+### 网页版资料导航
 
-详见个人博客：https://harrisonls2004.github.io
+在线访问：[北邮网安学习资料库](https://harrisonls2004.github.io/BUPT-SCSS-2023/)。
+
+新增按学期、课程和文件类型浏览的网页，支持搜索、课程介绍与深浅色模式。
 
 ### 课件及资料
 
@@ -28,21 +30,6 @@
 
 23网安学长：lhldudu、23信安学长：ez-lbz
 
-### 特别鸣谢
-
-XF：https://github.com/77feng/bupt_scss_course
-
-SQ：https://shenqi629.notion.site/
-
-ZYH：https://shuita2333.github.io/
-
-WD：https://pewter-tarsier-5b9.notion.site/1d826533399b4e44a8a513ddd63e881a
-
-HDW：https://github.com/fengchen555/BUPT-SCSS-learning-source
-
-24级的同学们可以看同年级RCY的最新资料仓库哦～
-
-RCY：https://github.com/cyruan815/BUPT_SCSS_2024
 
 ### 总结
 
