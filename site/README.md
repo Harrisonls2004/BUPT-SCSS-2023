@@ -1,6 +1,6 @@
 # 北邮网安课程资料网页
 
-参考 [NKAI DataShare](https://github.com/nkai-share/nankai-ai-Datashare) 的资料导航思路，为当前仓库编写的蓝白风格静态网页。
+北京邮电大学网络空间安全学院2023级课程资料库的静态网页，提供课程目录、资料搜索、Markdown 阅读和学期筛选功能。
 
 ## 本地预览
 
