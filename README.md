@@ -1,7 +1,5 @@
 # 北邮网安课程资料网页
 
-参考 [NKAI DataShare](https://github.com/nkai-share/nankai-ai-Datashare) 的资料导航思路，为当前仓库编写的蓝白风格静态网页。
-
 ## 本地预览
 
 在仓库根目录执行：
