@@ -17,7 +17,7 @@
 <tr>
 <th scope="row">同学反馈</th>
 <td>
-<p>dxl，懂得都懂。</p>
+<p>懂得都懂。</p>
 </td>
 </tr>
 </tbody>

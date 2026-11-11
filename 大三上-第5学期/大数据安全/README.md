@@ -22,7 +22,7 @@
 <th rowspan="3" scope="rowgroup">注意事项</th>
 <th scope="row">复习与评分体验</th>
 <td>
-<p>srs上的。<strong>考勤作业实验50分，期末开卷考试50分。</strong></p>
+<p><strong>考勤作业实验50分，期末开卷考试50分。</strong></p>
 </td>
 </tr>
 <tr>

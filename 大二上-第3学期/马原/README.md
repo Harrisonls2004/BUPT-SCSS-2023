@@ -22,7 +22,7 @@
 <th rowspan="3" scope="rowgroup">注意事项</th>
 <th scope="row">考试与复习</th>
 <td>
-<p>yyp老师上的，老师说话很温柔。分数构成是<strong>平时30期中20期末50</strong>，但是这门课是<strong>闭卷</strong>。</p>
+<p>老师说话很温柔。分数构成是<strong>平时30期中20期末50</strong>，但是这门课是<strong>闭卷</strong>。</p>
 </td>
 </tr>
 <tr>

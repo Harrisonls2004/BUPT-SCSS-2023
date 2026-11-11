@@ -22,7 +22,7 @@
 <th rowspan="3" scope="rowgroup">注意事项</th>
 <th scope="row">期末考核</th>
 <td>
-<p>老师是zay，给分还行。</p>
+<p>给分还行。</p>
 </td>
 </tr>
 <tr>

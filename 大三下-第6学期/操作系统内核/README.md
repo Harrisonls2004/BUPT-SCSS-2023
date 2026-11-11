@@ -22,7 +22,7 @@
 <th rowspan="3" scope="rowgroup">注意事项</th>
 <th scope="row">作业与论文</th>
 <td>
-<p>ywc老师上的，分数构成<strong>期末小论文70平时作业30</strong></p>
+<p>分数构成<strong>期末小论文70平时作业30</strong></p>
 </td>
 </tr>
 <tr>

@@ -22,7 +22,7 @@
 <th rowspan="2" scope="rowgroup">注意事项</th>
 <th scope="row">考核变化</th>
 <td>
-<p>glz上的，<strong>平时20期中20期末60。</strong></p>
+<p><strong>平时20期中20期末60。</strong></p>
 <p>当时只有g老师有期中（随堂考试），但是24级开始全部都有期中考试了。考试很喜欢出历年原题，多写几套历年题容易考高分。</p>
 </td>
 </tr>

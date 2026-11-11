@@ -22,7 +22,7 @@
 <th rowspan="5" scope="rowgroup">注意事项</th>
 <th scope="row">作业与实验</th>
 <td>
-<p>老师是yz。<strong>平时作业与实验45，期中考试5，期末考试50</strong>。</p>
+<p><strong>平时作业与实验45，期中考试5，期末考试50</strong>。</p>
 </td>
 </tr>
 <tr>

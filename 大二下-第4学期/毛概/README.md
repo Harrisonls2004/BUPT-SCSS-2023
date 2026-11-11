@@ -24,7 +24,7 @@
 <th rowspan="3" scope="rowgroup">注意事项</th>
 <th scope="row">平时考核</th>
 <td>
-<p>老师是qwj，讲课非常好。</p>
+<p>讲课非常好。</p>
 <p><strong>平时40</strong>：出勤4分，回答三次问题4分，小组课堂展示16分，随堂小测16分（其实我们当时就搞了一次，当考勤）</p>
 </td>
 </tr>

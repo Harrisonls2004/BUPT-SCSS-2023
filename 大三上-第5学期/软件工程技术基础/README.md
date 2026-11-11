@@ -24,7 +24,7 @@
 <th rowspan="5" scope="rowgroup">注意事项</th>
 <th scope="row">平时要求</th>
 <td>
-<p>lxf上的，不签到可以不用听。</p>
+<p>不签到可以不用听。</p>
 </td>
 </tr>
 <tr>
